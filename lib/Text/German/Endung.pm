@@ -3,9 +3,9 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Sun Apr  3 11:43:47 2005
+# Last Modified On: Sun Apr  3 12:16:20 2005
 # Language        : Perl
-# Update Count    : 44
+# Update Count    : 45
 # Status          : Unknown, Use with caution!
 
 package Text::German::Endung;
@@ -34,7 +34,7 @@ sub endungen {
   
   for $i (1 .. length($word)) {
     my $endung = substr($word, length($word)-$i,$i);
-    if (defined $ENDUNG{$endung}
+    if (defined $ENDUNG{$endung} && defined $ENDUNG{$endung}->[1]
         and ($ENDUNG{$endung}->[1] & $class)) {
       push @result, $endung;
     }

@@ -3,14 +3,15 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Sun Apr  3 11:43:59 2005
+# Last Modified On: Sun Apr  3 12:11:51 2005
 # Language        : Perl
-# Update Count    : 71
+# Update Count    : 73
 # Status          : Unknown, Use with caution!
 
 package Text::German::Regel;
 use Text::German::Util;
 
+$debug = 0;
 @REGEL = ();                    # -w
 
 {
