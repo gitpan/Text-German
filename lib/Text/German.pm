@@ -5,15 +5,15 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 13:57:42 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Sun Apr  3 11:33:47 2005
+# Last Modified On: Sun Apr  3 11:51:49 2005
 # Language        : Perl
-# Update Count    : 68
+# Update Count    : 69
 # Status          : Unknown, Use with caution!
 #
 
 package Text::German;
 
-$VERSION = $VERSION = 0.04;
+$VERSION = $VERSION = 0.05;
 use Text::German::Util;
 require Text::German::Adjektiv;
 require Text::German::Ausnahme;
