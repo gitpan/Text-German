@@ -1,23 +1,12 @@
-#!/usr/local/ls6/bin/perl
 #                              -*- Mode: Perl -*- 
 # Util.pm -- 
-# ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 16:08:41 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Mon May  6 15:18:48 1996
+# Last Modified On: Sun Apr  3 11:44:12 2005
 # Language        : Perl
-# Update Count    : 7
+# Update Count    : 8
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker: pfeifer $
-# $Log: Util.pm,v $
-# Revision 1.1  1996/02/01 15:17:04  pfeifer
-# Initial revision
-#
-# 
 
 package Text::German::Util;
 require Exporter;

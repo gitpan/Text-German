@@ -1,19 +1,13 @@
 #                              -*- Mode: Perl -*- 
 # Cache.pm -- 
-# ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Mon May 13 11:14:06 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Mon May 13 12:35:38 1996
+# Last Modified On: Sun Apr  3 11:43:04 2005
 # Language        : CPerl
-# Update Count    : 16
+# Update Count    : 17
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker$
-# $Log$
-# 
+
 package Text::German::Cache;
 
 sub new {

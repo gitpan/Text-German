@@ -1,23 +1,12 @@
-#!/usr/local/ls6/bin/perl
 #                              -*- Mode: Perl -*- 
 # Endung.pm -- 
-# ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue May  7 17:14:01 1996
+# Last Modified On: Sun Apr  3 11:43:47 2005
 # Language        : Perl
-# Update Count    : 42
+# Update Count    : 44
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker: pfeifer $
-# $Log: Endung.pm,v $
-# Revision 1.1  1996/02/01 15:17:04  pfeifer
-# Initial revision
-#
-# 
 
 package Text::German::Endung;
 # require Exporter;

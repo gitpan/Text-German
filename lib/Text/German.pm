@@ -1,33 +1,19 @@
-#!/usr/local/ls6/bin/perl
+#!/usr/bin/perl
 #                              -*- Mode: Perl -*- 
 # Word.pm -- 
 # ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 13:57:42 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Mon Jun  3 16:45:47 1996
+# Last Modified On: Sun Apr  3 11:33:47 2005
 # Language        : Perl
-# Update Count    : 67
+# Update Count    : 68
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker:  $
-# $Log: German.pm,v $
-# Revision 0.03  1996/07/02 09:39:11  pfeifer
-# *** empty log message ***
 #
-# Revision 0.02  1996/05/13 10:07:46  pfeifer
-# Added rudimentary cache support.
-#
-# Revision 1.1  1996/02/01 15:19:36  pfeifer
-# Initial revision
-#
-# 
 
 package Text::German;
 
-$VERSION = $VERSION = substr(q$Revision: 0.03 $,10);
+$VERSION = $VERSION = 0.04;
 use Text::German::Util;
 require Text::German::Adjektiv;
 require Text::German::Ausnahme;

@@ -13,3 +13,4 @@ lib/Text/German/Verb.pm
 lib/Text/German/Vorsilbe.pm
 t/basic.t
 t/cache.t
+META.yml                                 Module meta-data (added by MakeMaker)

@@ -1,23 +1,12 @@
-#!/usr/local/ls6/bin/perl
 #                              -*- Mode: Perl -*- 
 # Regel.pm -- 
-# ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue May  7 17:14:24 1996
+# Last Modified On: Sun Apr  3 11:43:59 2005
 # Language        : Perl
-# Update Count    : 70
+# Update Count    : 71
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker: pfeifer $
-# $Log: Regel.pm,v $
-# Revision 1.1  1996/02/01 15:17:04  pfeifer
-# Initial revision
-#
-# 
 
 package Text::German::Regel;
 use Text::German::Util;

@@ -1,19 +1,12 @@
 #                              -*- Mode: Perl -*- 
 # German.pod -- 
-# ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Tue Jul  2 11:24:15 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue Jul  2 11:32:53 1996
+# Last Modified On: Sun Apr  3 11:39:28 2005
 # Language        : CPerl
-# Update Count    : 4
+# Update Count    : 6
 # Status          : Unknown, Use with caution!
-# 
-# (C) Copyright 1996, Universität Dortmund, all rights reserved.
-# 
-# $Locker$
-# $Log$
-# 
 
 =head1 NAME
 
@@ -38,3 +31,9 @@ implementation did except it is about 75 times faster.
 =head1 AUTHOR
 
 Ulrich Pfeifer F<E<lt>pfeifer@ls6.informatik.uni-dortmund.deE<gt>>
+
+=head1 COPYRIGHT
+
+Copyright (c) 1996 Ulrich Pfeifer. All rights reserved. This program
+is free software; you can redistribute it and/or modify it under the
+same terms as Perl itself.
