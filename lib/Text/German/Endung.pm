@@ -5,9 +5,9 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Thu Feb  1 16:08:24 1996
+# Last Modified On: Tue May  7 17:14:01 1996
 # Language        : Perl
-# Update Count    : 33
+# Update Count    : 42
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -20,66 +20,66 @@
 # 
 
 package Text::German::Endung;
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(%ENDUNG);
+# require Exporter;
+# @ISA = qw(Exporter);
+# @EXPORT = qw(%ENDUNG);
 
 use Text::German::Util;
-
-while (<DATA>) {
+{
+  local ($_);
+  
+  while (<DATA>) {
     chomp;
     my ($endung, $key) = split;
     my ($a,$b,$c,$d) = split ':', $key; # $c, $d nicht verwedet?
     my $B = Text::German::Util::bit_to_int($b);
     $ENDUNG{$endung} = [$a,$B,$c,$d];
+  }
+  close DATA;
 }
-close DATA;
 
 sub endungen {
-    my $word = shift;
-    my $class = wordclass($word);
-    my @result;
-
-    for $i (1 .. length($word)) {
-        my $endung = substr($word, length($word)-$i,$i);
-        if (defined $ENDUNG{$endung}
-	    and !($ENDUNG{$endung}->[1] || $class)) {
-            push @result, $endung;
-        }
+  my $word  = shift;
+  my $class = wordclass($word);
+  my @result;
+  
+  for $i (1 .. length($word)) {
+    my $endung = substr($word, length($word)-$i,$i);
+    if (defined $ENDUNG{$endung}
+        and ($ENDUNG{$endung}->[1] & $class)) {
+      push @result, $endung;
     }
-    @result;
+  }
+  @result;
 }
 
 sub max_endung {
-    my $word   = shift;
-    my $class  = wordclass($word);
-    my $result = undef;
-
-    for $i (1 .. length($word)) {
-        my $endung = substr($word, length($word)-$i,$i);
-        if (defined $ENDUNG{$endung}
-	    and ($ENDUNG{$endung}->[1] | $class)) {
-	#print "Endung $endung $class ",$ENDUNG{$endung}->[1]," ",
-	#$ENDUNG{$endung}->[1] | $class, "\n";
-	#print "result=$result endung=$endung\n";
-            $result = $endung
-                if !defined($result) || length($endung) > length($result);
-
-        }
+  my $word   = shift;
+  my $class  = wordclass($word);
+  my $result = undef;
+  
+  for $i (1 .. length($word)) {
+    my $endung = substr($word, length($word)-$i,$i);
+    if (defined $ENDUNG{$endung}
+        and ($ENDUNG{$endung}->[1] & $class)) {
+      $result = $endung
+        if !defined($result) || length($endung) > length($result);
+      
     }
-    $result;
+  }
+  $result;
 }
 
 sub wort_klasse {
-    my $endung = shift;
-    
-    $ENDUNG{$endung}->[1];
+  my $endung = shift;
+  
+  $ENDUNG{$endung}->[1];
 }
 
 sub regel {
-    my $endung = shift;
-    
-    $ENDUNG{$endung}->[0];
+  my $endung = shift;
+  
+  $ENDUNG{$endung}->[0];
 }
 
 1;

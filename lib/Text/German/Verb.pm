@@ -5,9 +5,9 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue Feb  6 17:38:29 1996
+# Last Modified On: Tue May  7 17:14:46 1996
 # Language        : Perl
-# Update Count    : 27
+# Update Count    : 28
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -24,12 +24,16 @@ require Exporter;
 @ISA = qw(Exporter);
 @EXPORT = qw(%VERB);
 
-while (<DATA>) {
+{
+  local ($_);
+  
+  while (<DATA>) {
     chomp;
     ($verb, $key) = split;
     $VERB{$verb} = [split ':', $key];
+  }
+  close DATA;
 }
-close DATA;
 
 sub reduce {
     my($v,$s,$e) = @_;

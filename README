@@ -1,0 +1,25 @@
+GERMAN(1)      User Contributed Perl Documentation      GERMAN(1)
+
+NAME
+       Text::German - German grundform reduction
+
+SYNOPSYS
+       use Text::German
+
+       $stem = Text::German::reduce($word)
+
+DESCRIPTION
+       This is a rather incomplete implementaion of work done by
+       Gudrun Putze-Meier <gudrun.pm@t-online.de>. I have to
+       confess that I never read her original paper. So all
+       credit belongs to her, all bugs are mine. I tried to get
+       some insight from an implementation of two students of
+       mine. They remain anonymous because their work was the
+       wost piece of code I ever saw. My code behaves mostly as
+       their implementation did except it is about 75 times
+       faster.
+
+AUTHOR
+       Ulrich Pfeifer <pfeifer@ls6.informatik.uni-dortmund.de>
+
+2/Jul/96                      perl                              1

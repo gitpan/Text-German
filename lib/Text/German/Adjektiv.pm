@@ -1,13 +1,12 @@
-#!/usr/local/ls6/bin/perl
 #                              -*- Mode: Perl -*- 
 # Adjektiv.pm -- 
 # ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Thu Feb  1 09:57:58 1996
+# Last Modified On: Tue May  7 17:15:11 1996
 # Language        : Perl
-# Update Count    : 19
+# Update Count    : 21
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -22,31 +21,30 @@
 package Text::German::Adjektiv;
 use Text::German::Util;
 
-#require Exporter;
-#@ISA = qw(Exporter);
-#@EXPORT = qw(%ADJEKTIV);
-
-while (<DATA>) {
+{
+  local ($_);
+  while (<DATA>) {
     chomp;
     ($adjektiv, $key) = split;
     $ADJEKTIV{$adjektiv} = [split ':', $key];
+  }
+  close DATA;
 }
-close DATA;
 
 sub reduce {
-    my($v,$s,$e) = @_;
-    
-    
-    #return undef unless $v.$s.$e =~ /$UMLAUTR/o;
-    while (1) {		# algorithmus unklar
-	if (defined $ADJECTIV{$s}) {
-	    return ($v, $ADJECTIV{$s}->[0], $e);
-	}
-	$s .= substr($e,0,1);
-	last unless $e;
-	$e  = substr($e,1);
+  my($v,$s,$e) = @_;
+  
+  
+  #return undef unless $v.$s.$e =~ /$UMLAUTR/o;
+  while (1) {                   # algorithmus unklar
+    if (defined $ADJECTIV{$s}) {
+      return ($v, $ADJECTIV{$s}->[0], $e);
     }
-    return undef;
+    $s .= substr($e,0,1);
+    last unless $e;
+    $e  = substr($e,1);
+  }
+  return undef;
 }
 
 1;

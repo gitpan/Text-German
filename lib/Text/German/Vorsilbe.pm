@@ -5,9 +5,9 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Thu Feb  1 14:21:43 1996
+# Last Modified On: Tue May  7 17:15:07 1996
 # Language        : Perl
-# Update Count    : 19
+# Update Count    : 22
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -20,42 +20,45 @@
 # 
 
 package Text::German::Vorsilbe;
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(%VORSILBE);
+# require Exporter;
+# @ISA = qw(Exporter);
+# @EXPORT = qw(%VORSILBE);
 
-while (<DATA>) {
+{
+  local ($_);
+  while (<DATA>) {
     chomp;
     ($vorsilbe, $key) = split;
-    $VORSILBE{$vorsilbe} = $key;
+    $VORSILBE{$vorsilbe} = pack 'b*', $key;
+  }
+  close DATA;
 }
-close DATA;
 
 sub vorsilben {
-    my $word = shift;
-    my @result;
-
-    for $i (1 .. length($word)) {
-        my $vorsilbe = substr($word,0,$i);
-        if (defined $VORSILBE{$vorsilbe}) {
-            push @result, $vorsilbe;
-        }
+  my $word = shift;
+  my @result;
+  
+  for $i (1 .. length($word)) {
+    my $vorsilbe = substr($word,0,$i);
+    if (defined $VORSILBE{$vorsilbe}) {
+      push @result, $vorsilbe;
     }
-    @result;
+  }
+  @result;
 }
 
 sub max_vorsilbe {
-    my $word  = shift;
-    my $result = undef;
-
-    for $i (1 .. length($word)) {
-        my $vorsilbe = substr($word,0,$i);
-        if (defined $VORSILBE{$vorsilbe}) {
-            $result = $vorsilbe
-                if !defined($result) || length($vorsilbe) > length($result);
-        }
+  my $word  = shift;
+  my $result = undef;
+  
+  for $i (1 .. length($word)) {
+    my $vorsilbe = substr($word,0,$i);
+    if (defined $VORSILBE{$vorsilbe}) {
+      $result = $vorsilbe
+        if !defined($result) || length($vorsilbe) > length($result);
     }
-    $result;
+  }
+  $result;
 }
 
 1;

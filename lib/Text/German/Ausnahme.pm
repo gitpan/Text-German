@@ -1,13 +1,12 @@
-#!/usr/local/ls6/bin/perl
 #                              -*- Mode: Perl -*- 
 # Ausnahme.pm -- 
 # ITIID           : $ITI$ $Header $__Header$
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue Feb  6 17:40:05 1996
+# Last Modified On: Tue May  7 17:13:27 1996
 # Language        : Perl
-# Update Count    : 20
+# Update Count    : 22
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -21,24 +20,27 @@
 
 package Text::German::Ausnahme;
 
-while (<DATA>) {
+{
+  local ($_);
+  while (<DATA>) {
     chomp;
     ($ausnahme, $key) = split;
     $AUSNAHME{$ausnahme} = $key;
+  }
+  close DATA;
 }
-close DATA;
 
 sub reduce {
-    my($v,$s,$e) = @_;
-    
-    $s = $v.$s;
-    while (1) {		# algorithmus unklar
-	return $AUSNAHME{$s} if defined $AUSNAHME{$s};
-	last unless $e;
-	$s .= substr($e,0,1);
-	$e = substr($e,1);
-    }
-    return undef;
+  my($v,$s,$e) = @_;
+  
+  $s = $v.$s;
+  while (1) {                   # algorithmus unklar
+    return $AUSNAHME{$s} if defined $AUSNAHME{$s};
+    last unless $e;
+    $s .= substr($e,0,1);
+    $e = substr($e,1);
+  }
+  return undef;
 }
 
 1;

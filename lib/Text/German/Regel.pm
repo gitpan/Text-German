@@ -5,9 +5,9 @@
 # Author          : Ulrich Pfeifer
 # Created On      : Thu Feb  1 09:10:48 1996
 # Last Modified By: Ulrich Pfeifer
-# Last Modified On: Tue Feb  6 17:52:16 1996
+# Last Modified On: Tue May  7 17:14:24 1996
 # Language        : Perl
-# Update Count    : 68
+# Update Count    : 70
 # Status          : Unknown, Use with caution!
 # 
 # (C) Copyright 1996, Universität Dortmund, all rights reserved.
@@ -23,7 +23,11 @@ package Text::German::Regel;
 use Text::German::Util;
 
 @REGEL = ();                    # -w
-while (<DATA>) {
+
+{
+  local ($_);
+  
+  while (<DATA>) {
     chomp;
     my ($regel, $a,$b,$c,$d,$e,@f) = split(/:/, $_);
     next unless $regel;
@@ -33,87 +37,87 @@ while (<DATA>) {
                              bit_to_int($d),
                              bit_to_int($e),
                              @f]);
+  }
+  close DATA;
 }
-close DATA;
-
 sub reduce {
-    my($v,$s,$e) = @_;
-    #my $init = join ':', ($v,$s,$e);
-    #local ($debug) = ($s eq 'Mit')?4:0;
-     
-    return undef if length($s.$e) < 3;
-    while (length($s)<3) {
-	$s .= substr($e,0,1);
-	$e = substr($e,1);
-    }   
-    while (1) {
-        my @tmp = reduce1($v,$s,$e);
-        if ($#tmp) {
-            my $tmp = join ':', @tmp;
-            #print STDERR "$init => $tmp\n";
-            return @tmp; # if $tmp  ne $init;
-        }
-        return @tmp if !$e;
-        $s .= substr($e,0,1);
-	$e = substr($e,1);
+  my($v,$s,$e) = @_;
+  #my $init = join ':', ($v,$s,$e);
+  #local ($debug) = ($s eq 'Mit')?4:0;
+  
+  return undef if length($s.$e) < 3;
+  while (length($s)<3) {
+    $s .= substr($e,0,1);
+    $e = substr($e,1);
+  }   
+  while (1) {
+    my @tmp = reduce1($v,$s,$e);
+    if ($#tmp) {
+      my $tmp = join ':', @tmp;
+      #print STDERR "$init => $tmp\n";
+      return @tmp;              # if $tmp  ne $init;
     }
+    return @tmp if !$e;
+    $s .= substr($e,0,1);
+    $e = substr($e,1);
+  }
 }
 
 sub reduce1 {
-    my($v,$s,$e) = @_;
-    my $fc;
-    my $fr;
-    my $did_match;
-
-    while (1) {
-	$fr = Text::German::Endung::regel($e); # || '001'; # ???
-	last if defined $fr;
-	last unless $e;
-	$s .= substr($e,0,1);
-	$e = substr($e,1);
+  my($v,$s,$e) = @_;
+  my $fc;
+  my $fr;
+  my $did_match;
+  
+  while (1) {
+    $fr = Text::German::Endung::regel($e); # || '001'; # ???
+    last if defined $fr;
+    last unless $e;
+    $s .= substr($e,0,1);
+    $e = substr($e,1);
+  }
+  return undef unless $fr;
+  $fc = Text::German::Endung::wort_klasse($e);
+  
+ ruleset: 
+  while (defined $REGEL[$fr]) {
+    for $r (@{$REGEL[$fr]}) {
+      next unless $r->[4] | $fc; # allowed wordclasses
+      my $match = $r->[5];
+      $match =~ s/\+/[bcdfghjklmnpqrstvwxyz]/;
+      $match =~ s/\%/[aeiou\344\366\374]/;
+      #my $ns = $s.$e;
+      #$ns = substr($ns,0,length($ns)-$r->[1]);
+      #$e  = substr($e, length($e)-$r->[1]);
+      print "\tREGEL: $fr:", (join ':', @{$r}),"\t($s,$match)\n"
+        if $debug > 1;
+      if ($s =~ /$match$/) {
+        $did_match++;
+        print "\tREGEL: $fr:", (join ':', @{$r}),"\t$s => "
+          if $debug;
+        $s = (substr($s,0,length($s)-$r->[7])) if $r->[7];
+        $s .= $r->[8] if $r->[8];
+        print "$s\n" if $debug;
+        if ($r->[6]) {          # vorsilbe 'ge' kann entfallen?
+          $v =~ s/^ge//;
+        }
+        $fr = $r->[0];
+        $fc = $r->[3];          # ???
+        if ($fr ne '000') {
+          next ruleset;
+        } else {
+          #$s = substr($s,0,length($s)-$r->[1]);
+          last;
+        }
+      }
     }
-    return undef unless $fr;
-    $fc = Text::German::Endung::wort_klasse($e);
-    
-  ruleset: 
-    while (defined $REGEL[$fr]) {
-	for $r (@{$REGEL[$fr]}) {
-	    next unless $r->[4] | $fc; # allowed wordclasses
-	    my $match = $r->[5];
-	    $match =~ s/\+/[bcdfghjklmnpqrstvwxyz]/;
-	    $match =~ s/\%/[aeiou\344\366\374]/;
-	    #my $ns = $s.$e;
-	    #$ns = substr($ns,0,length($ns)-$r->[1]);
-	    #$e  = substr($e, length($e)-$r->[1]);
-	    print "\tREGEL: $fr:", (join ':', @{$r}),"\t($s,$match)\n"
-		if $debug > 1;
-	    if ($s =~ /$match$/) {
-                $did_match++;
-		print "\tREGEL: $fr:", (join ':', @{$r}),"\t$s => "
-		    if $debug;
-		$s = (substr($s,0,length($s)-$r->[7])) if $r->[7];
-                $s .= $r->[8] if $r->[8];
-		print "$s\n" if $debug;
-		if ($r->[6]) { # vorsilbe 'ge' kann entfallen?
-		    $v =~ s/^ge//;
-		}
-		$fr = $r->[0];
-		$fc = $r->[3]; # ???
-		if ($fr ne '000') {
-		    next ruleset;
-		} else {
-		    #$s = substr($s,0,length($s)-$r->[1]);
-		    last;
-		}
-	    }
-	}
-	last;
-    }
-    if ($did_match) {
-        return ($v,$s,$e);
-    } else {
-        return undef;
-    }
+    last;
+  }
+  if ($did_match) {
+    return ($v,$s,$e);
+  } else {
+    return undef;
+  }
 }
 
 1;

@@ -2,10 +2,10 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 WriteMakefile(
-    'NAME'	=> 'Text::German',
-    'VERSION'	=> '0.02',
-    'LIBS'	=> [''],   # e.g., '-lm' 
-    'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> '',     # e.g., '-I/usr/include/other' 
-    'dist'      => { SUFFIX => 'gz', COMPRESS => 'gzip -f' },
+    'NAME'	   => 'Text::German',
+    'VERSION_FROM' => 'lib/Text/German.pm',
+    'LIBS'	   => [''],   # e.g., '-lm' 
+    'DEFINE'	   => '',     # e.g., '-DHAVE_SOMETHING' 
+    'INC'	   => '',     # e.g., '-I/usr/include/other' 
+    'dist'         => { SUFFIX => 'gz', COMPRESS => 'gzip -f' },
 );
